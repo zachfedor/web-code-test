@@ -13,6 +13,11 @@ function App() {
         <StockProducts />
 
         <BuyList />
+
+        <div className="text-right font-semibold text-lg mt-4">
+          Total:
+          <span className="text-xl ml-2">$0.00</span>
+        </div>
       </div>
     </div>
   );
