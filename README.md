@@ -21,8 +21,6 @@ The goal of this is to see how you handle react functionality and state manageme
 
 While writing tests is not a requirement of this code test, we do test our code. If you would like, feel free to write some tests to give us an idea of your thought process. We use a mix of Jest and React Testing Library. Here's a link for getting that setup [here](https://create-react-app.dev/docs/running-tests/).
 
-Try to commit early and often. We will be looking at commit history.
-
 ## Getting set up
 
 Follow these steps for setting up this code test locally:
