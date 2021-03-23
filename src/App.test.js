@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
+import { displayCurrency } from './currency';
 import StockProductsData from './data/stockProducts.json';
 
 test('renders restuarant order system', () => {
@@ -59,25 +60,25 @@ test('can recalculate BuyList total when quantity changed or item removed', () =
   // 1. The per unit price if product is added to BuyList
   // 2. That product's sub-total if its quantity is 1
   // 3. The BuyList total if its quantity is 1 and there are no other products
-  expect(screen.getAllByText(`$ ${productA.price}`).length).toBe(3);
+  expect(screen.getAllByText(displayCurrency(productA.price)).length).toBe(3);
 
   // Add product B and verify change in total
   userEvent.click(screen.getByRole('button', { name: productB.name }));
-  expect(screen.getAllByText(`$ ${productA.price}`).length).toBe(2); // per unit and sub-total
-  expect(screen.getAllByText(`$ ${productB.price}`).length).toBe(2); // per unit and sub-total
-  expect(screen.getAllByText(`$ ${productA.price + productB.price}`).length).toBe(1); // total
+  expect(screen.getAllByText(displayCurrency(productA.price)).length).toBe(2); // per unit and sub-total
+  expect(screen.getAllByText(displayCurrency(productB.price)).length).toBe(2); // per unit and sub-total
+  expect(screen.getAllByText(displayCurrency(productA.price + productB.price)).length).toBe(1); // total
 
   // Increase quantity of a product A to ten units
   const productAQty = screen.getAllByRole('spinbutton')[0];
   userEvent.type(productAQty, '0'); // append a '0' after the default of '1'
 
   // Verify change in total
-  expect(screen.getByText(`$ ${(productA.price * 10) + productB.price}`)).toBeInTheDocument();
+  expect(screen.getByText(displayCurrency((productA.price * 10) + productB.price))).toBeInTheDocument();
 
   // Remove product A
   userEvent.click(screen.getAllByRole('button', { name: 'Remove' })[0]);
 
   // Verify change in total
-  expect(screen.getAllByText(`$ ${productB.price}`).length).toBe(3); // per unit, sub-total, total
-  expect(screen.queryByText(`$ ${productA.price}`)).not.toBeInTheDocument();
+  expect(screen.getAllByText(displayCurrency(productB.price)).length).toBe(3); // per unit, sub-total, total
+  expect(screen.queryByText(displayCurrency(productA.price))).not.toBeInTheDocument();
 });

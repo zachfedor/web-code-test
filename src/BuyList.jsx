@@ -1,3 +1,5 @@
+import { displayCurrency } from './currency';
+
 const BuyList = ({ buyListQuantityHandler, products, removeFromBuyListHandler }) => (
   <div className="mt-4">
     <h1 className="font-semibold text-2xl">Buy List</h1>
@@ -12,7 +14,7 @@ const BuyList = ({ buyListQuantityHandler, products, removeFromBuyListHandler })
           </div>
 
           <div className="font-semibold text-lg text-red-500 flex items-center justify-end">
-            $ {product.price}
+            {displayCurrency(product.price)}
           </div>
 
           <span className="flex items-center font-semibold">x</span>
@@ -24,7 +26,7 @@ const BuyList = ({ buyListQuantityHandler, products, removeFromBuyListHandler })
           <span className="flex items-center">=</span>
 
           <span className="flex items-center font-semibold text-green-500 text-xl">
-            $ {product.quantity * product.price}
+            {displayCurrency(product.quantity * product.price)}
           </span>
 
           <div className="flex items-center justify-end">

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import BuyList from './BuyList';
+import { displayCurrency } from './currency';
 import StockProducts from './StockProducts.jsx';
 import StockProductsData from "./data/stockProducts.json";
 
@@ -76,7 +77,7 @@ function App() {
 
         <div className="text-right font-semibold text-lg mt-4">
           Total:
-          <span className="text-xl ml-2">{`$ ${buyListTotal}`}</span>
+          <span className="text-xl ml-2">{displayCurrency(buyListTotal)}</span>
         </div>
       </div>
     </div>
