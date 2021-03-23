@@ -4,7 +4,7 @@ const StockProductsDataMap = new Map(
   StockProductsData.map((product) => [product.itemNumber, product])
 );
 
-const BuyList = ({ items }) => (
+const BuyList = ({ items, removeFromBuyListHandler }) => (
   <div className="mt-4">
     <h1 className="font-semibold text-2xl">Buy List</h1>
 
@@ -36,7 +36,7 @@ const BuyList = ({ items }) => (
             </span>
 
             <div className="flex items-center justify-end">
-              <button type="button" className="bg-red-100 hover:bg-red-200 p-1 rounded ml-2">
+              <button type="button" className="bg-red-100 hover:bg-red-200 p-1 rounded ml-2" aria-label="Remove" onClick={removeFromBuyListHandler(item.itemNumber)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="text-red-500 w-6">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                 </svg>

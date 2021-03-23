@@ -28,3 +28,21 @@ test('can add product to BuyList', () => {
   userEvent.click(productElement);
   expect(screen.getAllByText(testProduct.name).length).toBe(2);
 });
+
+test('can remove product from BuyList', () => {
+  const testProduct = StockProductsData[0];
+
+  // Render the app and add the test product to BuyList
+  render(<App />);
+  userEvent.click(screen.getByRole('button', {
+    name: testProduct.name,
+  }));
+  expect(screen.getAllByText(testProduct.name).length).toBe(2);
+
+
+  // Click the remove button, then verify it was removed
+  const button = screen.getByRole('button', { name: 'Remove' });
+  userEvent.click(button);
+  expect(button).not.toBeInTheDocument();
+  expect(screen.getAllByText(testProduct.name).length).toBe(1);
+});
