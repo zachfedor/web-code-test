@@ -1,8 +1,26 @@
+import * as React from 'react';
 import './App.css';
 import StockProducts from './StockProducts.jsx';
 import BuyList from './BuyList';
 
 function App() {
+  const [buyListItems, setBuyListItems] = React.useState([]);
+
+  /**
+   * Create event handler for a given itemNumber
+   *
+   * When the event handler runs, the product will be added to BuyList array with a default
+   * quanity of 1, if it isn't already included. If the product has already been added to the
+   * BuyList, nothing happens.
+   * @param {string} itemNumber - The unique id of a product
+   * @returns {function} - An event handler
+   */
+  const addToBuyListHandler = (itemNumber) => () => {
+    if (!buyListItems.find(item => item.itemNumber === itemNumber)) {
+      setBuyListItems([...buyListItems, { itemNumber, quantity: 1 }]);
+    }
+  };
+
   return (
     <div className="p-10 m-auto bg-blue-50 min-h-screen">
       <div className="border border-gray-300 rounded-lg w-full bg-white p-10 shadow-lg">
@@ -10,9 +28,9 @@ function App() {
         <hr className="my-3 border border-0 border-t-1 border-gray-200" />
         Select products below to add to the ordering guide
 
-        <StockProducts />
+        <StockProducts addToBuyListHandler={addToBuyListHandler} />
 
-        <BuyList />
+        <BuyList items={buyListItems} />
 
         <div className="text-right font-semibold text-lg mt-4">
           Total:
